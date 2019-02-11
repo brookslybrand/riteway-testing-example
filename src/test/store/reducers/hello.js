@@ -3,7 +3,7 @@ import deepFreeze from 'deep-freeze'
 
 import hello from 'store/reducers/hello'
 
-describe('SET_MODE 2', async assert => {
+describe('SET_MODE', async assert => {
   assert({
     given: 'initial state',
     should: `set { mode: 'display', subject: 'world' }`,

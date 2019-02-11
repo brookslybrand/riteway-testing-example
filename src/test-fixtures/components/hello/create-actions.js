@@ -1,6 +1,6 @@
 const createActions = actions => ({
   ...{
-    setWord() {},
+    setSubject() {},
     setMode() {}
   },
   actions

@@ -10,12 +10,13 @@ const render = ReactDOMServer.renderToStaticMarkup
 
 describe('Hello component', async assert => {
   const noProps = () => {
-    const text = '<p>Hello, World!</p>'
-    const re = new RegExp(text, 'g')
-
     const props = {
+      helloClass: 'hello',
       actions: createActions()
     }
+
+    const text = `<p class="${props.helloClass}">Hello, World!</p>`
+    const re = new RegExp(text, 'g')
 
     const el = <Hello {...props} />
     const $ = dom.load(render(el))
@@ -32,25 +33,46 @@ describe('Hello component', async assert => {
   })
 
   const withProps = () => {
-    const text = '<p>Hello, React!</p>'
-    const re = new RegExp(text, 'g')
-
     const props = {
+      helloClass: 'hello',
       subject: 'React',
       actions: createActions()
     }
 
+    const text = `<p class="${props.helloClass}">Hello, React!</p>`
+    const re = new RegExp(text, 'g')
+
     const el = <Hello {...props} />
     const $ = dom.load(render(el))
+
     const output = $.html()
 
     return re.test(output)
   }
 
   assert({
-    given: 'with a subject',
-    should: 'render our hello greeting!',
+    given: 'a subject',
+    should: 'render greeting with correct subject!',
     expected: true,
     actual: withProps()
+  })
+
+  const getEditField = () => {
+    const props = {
+      helloClass: 'hello',
+      mode: 'edit',
+      actions: createActions()
+    }
+
+    const el = <Hello {...props} />
+    const $ = dom.load(render(el))
+    return $('p').html()
+  }
+
+  assert({
+    given: 'edit mode',
+    should: 'have an input with the correct text',
+    expected: 'Hello, <input type="text" class="hello" value="World">!',
+    actual: getEditField()
   })
 })

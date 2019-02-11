@@ -13,11 +13,13 @@ const App = ({ foo, ...props }) => {
   // generate the hello props
   const helloProps = {
     ...props,
+    subject: state.subject,
+    mode: state.mode,
     actions: {
-      setMode: mode => dispatch({ type: 'SET_MODE', mode })
+      setMode: mode => dispatch({ type: 'SET_MODE', mode }),
+      setSubject: subject => dispatch({ type: 'SET_SUBJECT', subject })
     }
   }
-
   // show the state updating
   console.log(state)
 
