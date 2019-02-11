@@ -1,6 +1,6 @@
 import { describe, Try } from 'riteway'
 
-import { sum } from './sum'
+import { sum } from '../../helpers/sum'
 
 describe('sum()', async assert => {
   const should = 'return the correct sum'

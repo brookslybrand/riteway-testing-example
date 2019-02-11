@@ -1,27 +1,14 @@
 import React from 'react'
 import ReactDOMServer from 'react-dom/server'
-import test from 'tape'
 import dom from 'cheerio'
 import { describe } from 'riteway'
 
-import App from '../App'
+import App from 'App'
+import createActions from 'test-fixtures/components/hello/create-actions'
 
 const render = ReactDOMServer.renderToStaticMarkup
 
-const createActions = actions => {
-  return Object.assign(
-    {},
-    {
-      setWord() {},
-      setMode() {}
-    },
-    actions
-  )
-}
-
-describe('App.js with RITEway', async assert => {
-  const should = 'Should render all sections.'
-
+describe('App component', async assert => {
   const props = {
     foo: 'foo',
     helloClass: 'hello',

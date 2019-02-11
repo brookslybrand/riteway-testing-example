@@ -1,42 +1,25 @@
 import React, { useReducer } from 'react'
 
-import Title from './components/Title'
-import Hello from './components/Hello'
+import Title from 'components/Title'
+import Hello from 'components/Hello'
 
-const assign = Object.assign
+import helloReducer from 'store/reducers/hello'
 
-const reducer = (
-  state = { mode: 'display', subject: 'World' },
-  { mode, subject, type } = {}
-) => {
-  switch (type) {
-    case 'SET_MODE':
-      return assign({}, state, {
-        mode
-      })
-    case 'SET_SUBJECT':
-      return assign({}, state, {
-        subject
-      })
-    default:
-      return state
-  }
-}
+const App = ({ foo, ...props }) => {
+  // create the reducer
+  // calling the function gets the default props
+  const [state, dispatch] = useReducer(helloReducer, helloReducer())
 
-const Foo = ({ foo, ...props }) => {
-  const [state, dispatch] = useReducer(reducer, {
-    mode: 'display',
-    subject: 'World'
-  })
-
-  const setMode = mode => dispatch({ type: 'SET_MODE', mode })
-
+  // generate the hello props
   const helloProps = {
     ...props,
     actions: {
-      setMode
+      setMode: mode => dispatch({ type: 'SET_MODE', mode })
     }
   }
+
+  // show the state updating
+  console.log(state)
 
   return (
     <div className="content">
@@ -47,4 +30,4 @@ const Foo = ({ foo, ...props }) => {
   )
 }
 
-export default Foo
+export default App

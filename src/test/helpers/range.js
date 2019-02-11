@@ -1,6 +1,6 @@
 import { describe, Try } from 'riteway'
 
-import { range } from './range'
+import { range } from '../../helpers/range'
 
 describe('range()', async assert => {
   assert({
