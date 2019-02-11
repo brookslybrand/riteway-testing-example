@@ -1,28 +1,50 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useReducer } from 'react'
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
+import Title from './components/Title'
+import Hello from './components/Hello'
+
+const assign = Object.assign
+
+const reducer = (
+  state = { mode: 'display', subject: 'World' },
+  { mode, subject, type } = {}
+) => {
+  switch (type) {
+    case 'SET_MODE':
+      return assign({}, state, {
+        mode
+      })
+    case 'SET_SUBJECT':
+      return assign({}, state, {
+        subject
+      })
+    default:
+      return state
   }
 }
 
-export default App;
+const Foo = ({ foo, ...props }) => {
+  const [state, dispatch] = useReducer(reducer, {
+    mode: 'display',
+    subject: 'World'
+  })
+
+  const setMode = mode => dispatch({ type: 'SET_MODE', mode })
+
+  const helloProps = {
+    ...props,
+    actions: {
+      setMode
+    }
+  }
+
+  return (
+    <div className="content">
+      <Title {...props} />
+      <Hello {...helloProps} />
+      <p>Content goes here: {foo}</p>
+    </div>
+  )
+}
+
+export default Foo

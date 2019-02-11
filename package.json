@@ -10,8 +10,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "test": "babel-node -r src/**/*.test.js | tap-nirvana"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -21,5 +21,16 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "@babel/core": "^7.2.2",
+    "@babel/node": "^7.2.2",
+    "@babel/preset-env": "^7.3.1",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/register": "^7.0.0",
+    "cheerio": "^1.0.0-rc.2",
+    "riteway": "^4.0.1",
+    "tap-nirvana": "^1.1.0",
+    "tape": "^4.9.2"
+  }
 }
