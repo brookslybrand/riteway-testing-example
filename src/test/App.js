@@ -1,12 +1,8 @@
 import React from 'react'
-import ReactDOMServer from 'react-dom/server'
-import dom from 'cheerio'
-import { describe } from 'riteway'
+import { describe, renderComponent as render } from 'riteway'
 
 import App from 'App'
 import createActions from 'test-fixtures/components/hello/create-actions'
-
-const render = ReactDOMServer.renderToStaticMarkup
 
 describe('App component', async assert => {
   const props = {
@@ -17,8 +13,7 @@ describe('App component', async assert => {
     actions: createActions()
   }
 
-  const el = <App {...props} />
-  const $ = dom.load(render(el))
+  const $ = render(<App {...props} />)
 
   assert({
     given: `prop foo`,

@@ -1,11 +1,7 @@
 import React from 'react'
-import ReactDOMServer from 'react-dom/server'
-import { describe } from 'riteway'
-import dom from 'cheerio'
+import { describe, renderComponent as render } from 'riteway'
 
 import Title from 'components/Title'
-
-const render = ReactDOMServer.renderToStaticMarkup
 
 describe('Title component', async assert => {
   const titleText = 'Hello!'
@@ -15,8 +11,7 @@ describe('Title component', async assert => {
   }
   const re = new RegExp(titleText, 'g')
 
-  const el = <Title {...props} />
-  const $ = dom.load(render(el))
+  const $ = render(<Title {...props} />)
   const output = $('.title').html()
 
   assert({

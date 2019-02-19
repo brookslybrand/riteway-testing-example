@@ -1,12 +1,8 @@
 import React from 'react'
-import ReactDOMServer from 'react-dom/server'
-import { describe } from 'riteway'
-import dom from 'cheerio'
+import { describe, renderComponent as render } from 'riteway'
 
 import Hello from 'components/hello'
 import createActions from 'test-fixtures/components/hello/create-actions'
-
-const render = ReactDOMServer.renderToStaticMarkup
 
 describe('Hello component', async assert => {
   const noProps = () => {
@@ -18,8 +14,7 @@ describe('Hello component', async assert => {
     const text = `<p class="${props.helloClass}">Hello, World!</p>`
     const re = new RegExp(text, 'g')
 
-    const el = <Hello {...props} />
-    const $ = dom.load(render(el))
+    const $ = render(<Hello {...props} />)
     const output = $.html()
 
     return re.test(output)
@@ -42,8 +37,7 @@ describe('Hello component', async assert => {
     const text = `<p class="${props.helloClass}">Hello, React!</p>`
     const re = new RegExp(text, 'g')
 
-    const el = <Hello {...props} />
-    const $ = dom.load(render(el))
+    const $ = render(<Hello {...props} />)
 
     const output = $.html()
 
@@ -64,8 +58,7 @@ describe('Hello component', async assert => {
       actions: createActions()
     }
 
-    const el = <Hello {...props} />
-    const $ = dom.load(render(el))
+    const $ = render(<Hello {...props} />)
     return $('p').html()
   }
 
